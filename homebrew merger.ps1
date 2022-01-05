@@ -67,7 +67,7 @@ Get-ChildItem | Where-Object { $_.name -match '\.json$' -and $_.name -notmatch '
         }
 
         # If a content-type already exists, add to that array; otherwise, create it
-        $file | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -notin 'siteVersion', '_meta'} | Select-Object -ExpandProperty Name | ForEach-Object {
+        $file | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -notin 'siteVersion', '_meta' } | Select-Object -ExpandProperty Name | ForEach-Object {
             if ($brew.$_) {
                 foreach ($thing in $file.$_) {
                     $brew.$_.Add($thing)
@@ -80,6 +80,11 @@ Get-ChildItem | Where-Object { $_.name -match '\.json$' -and $_.name -notmatch '
 }
 
 if ($fileCounter) {
+    # Remove `siteVersion` if unused
+    if (-not $brew.siteVersion) {
+        $brew.PSObject.Properties.Remove('siteVersion')
+    }
+
     # Pick a non-existent filename
     do {
         $outputFile = 'merged-homebrew-' + (-join (97..122 | Get-Random -Count 8 | ForEach-Object {[char]$_})) + '.json'
