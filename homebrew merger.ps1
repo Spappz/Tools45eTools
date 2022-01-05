@@ -2,8 +2,8 @@
 # ===================
 #
 # This script looks for 5eTools-style homebrew JSONs within the current directory. It then stitches them together,
-# outputting a single JSON to the same directory with all the content included, saving you have to lug around many
-# files at once. The output file will be named `merged-brew-<gibberish>.json`.
+# outputting a single JSON to the same directory with all the content included, saving you having to lug around
+# many files at once. The output file will be named `merged-brew-<gibberish>.json`.
 #
 # Note that while it does work with 5eTools homebrew JSONs made outside the Homebrew Builder, it will ignore any
 # custom datatypes you defined in the `_meta`. If you don't know what that means, you're good. 😎👍
