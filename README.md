@@ -10,4 +10,4 @@ This script stitches 5eTools-style homebrew JSONs together to output a single JS
 
 ---
 
-Raise an issue if something's broken. Contributions welcome.
+Raise an issue if something's broken. Development ongoing. Contributions welcome.
