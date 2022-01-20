@@ -87,7 +87,7 @@ if ($fileCounter) {
 
     # Pick a non-existent filename
     do {
-        $outputFile = 'merged-homebrew-' + (-join (97..122 | Get-Random -Count 8 | ForEach-Object {[char]$_})) + '.json'
+        $outputFile = 'merged-homebrew-' + (-join (97..122 | Get-Random -Count 8 | ForEach-Object { [char]$_ })) + '.json'
     } while (Test-Path $outputFile)
 
     # ConvertTo-Json collapses pretty much all symbols into `\uXXXX` codes; this reverses it 
