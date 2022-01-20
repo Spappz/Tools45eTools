@@ -10,4 +10,9 @@ This script stitches 5eTools-style homebrew JSONs together to output a single JS
 
 ---
 
+### Mask Rescaler
+This script resizes all the masks outputted by the PDF Image Extractor to match the preceding image's size.
+
+---
+
 Raise an issue if something's broken. Development ongoing. Contributions welcome.
