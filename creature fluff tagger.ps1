@@ -11,7 +11,8 @@
 # will add the `hasFluff` and `hasFluffImages` properties as appropriate to the creature. The script can handle
 # nested `_copy` references, as long as those references stay within the same file.
 #
-# Note: this script exports JSON in a compressed (one-line) format. I recommend you run a prettifier afterwards (such as the homebrew repo's `npm run build:clean`).
+# Note: this script exports JSON in a compressed (one-line) format. I recommend you run a prettifier afterwards
+# (such as the homebrew repo's `npm run build:clean`).
 #
 # Note: this script requires PowerShell 6 or higher. Windows 10 only has PowerShell 5 installed by default.
 #
