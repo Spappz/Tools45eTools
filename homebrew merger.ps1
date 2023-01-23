@@ -1,5 +1,5 @@
-﻿# 5eTools Brew Merger
-# ===================
+﻿# 5eTools Homebrew Merger
+# =======================
 #
 # This script looks for 5eTools-style homebrew JSONs within the current directory. It then stitches them together,
 # outputting a single JSON to the same directory with all the content included, saving you having to lug around
@@ -7,7 +7,6 @@
 #
 # Note that while it does work with 5eTools homebrew JSONs made outside the Homebrew Builder, it will ignore any
 # custom datatypes you defined in the `_meta`. If you don't know what that means, you're good. 😎👍
-#
 #
 #
 # Spappz 2022

@@ -1,4 +1,4 @@
-﻿# MASK RESCALER
+﻿# Mask Rescaler
 # =============
 #
 # If the PDF image extractor has given you masks that don't match the image dimensions, this script can help. First, make sure to remove ALL files from the

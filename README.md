@@ -1,7 +1,13 @@
 ## How2PowerShell
-On Windows, right-click this script and select 'Run with PowerShell'. On Mac OS and Linux, you will probably have to install [PowerShell](https://github.com/powershell/powershell) and run it via command line.
+On Windows, right-click this script and select 'Run with PowerShell'. If a script specifies that it requires a version of PowerShell greater than 5, you'll need to [install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows) it. On Mac OS and Linux, you will probably have to install [PowerShell](https://github.com/powershell/powershell) and run it via command line. 
 
 Each script has some comments at the top. Read them before use.
+
+---
+
+### Creature Fluff Tagger
+
+This script adds the `hasFluff` and `hasFluffImages` properties, as appropriate, to creatures with a referenced `_monsterFluff` object.
 
 ---
 
