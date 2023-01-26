@@ -22,7 +22,7 @@
 #
 # Parameters:
 #  -Path (string; required): absolute or relative path to a file or directory
-#  -Log (string; default "Errors"): sets which files you want to be informed about. "Errors" suppresses all logs;
+#  -Log (string; default "Errors"): determines the logging level of the script.. "Errors" suppresses all logs;
 #     "Default" only logs errors; "Changes" logs errors and files that have been changed; "Skips" logs errors and
 #     files which have *not* been changed; "All" displays all logs.
 #
