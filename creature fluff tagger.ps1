@@ -11,8 +11,8 @@
 # will add the `hasFluff` and `hasFluffImages` properties as appropriate to the creature. The script can handle
 # nested `_copy` references, as long as those references stay within the same file.
 #
-# Note: this script exports JSON in a compressed (one-line) format. I recommend you run a prettifier afterwards
-# (such as the homebrew repo's `npm run build:clean`).
+# Note: this script exports JSON in a compressed (one-line) format. I recommend you run a prettifier (such as the
+# homebrew repo's `npm run build:clean`) afterwards.
 #
 # Note: this script requires PowerShell 6 or higher. Windows 10 only has PowerShell 5 installed by default.
 #
@@ -21,7 +21,7 @@
 #   & <path to script> -Path <path to homebrew file/directory> [-Log <level>]
 #
 # Parameters:
-#  -Path (required, string): absolute or relative path to a file or directory
+#  -Path (string; required): absolute or relative path to a file or directory
 #  -Log (string; default "Errors"): sets which files you want to be informed about. "Errors" suppresses all logs;
 #     "Default" only logs errors; "Changes" logs errors and files that have been changed; "Skips" logs errors and
 #     files which have *not* been changed; "All" displays all logs.
