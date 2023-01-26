@@ -22,9 +22,9 @@
 #
 # Parameters:
 #  -Path (required, string): absolute or relative path to a file or directory
-#  -Log (string; default "none"): sets which files you want to be informed about. "None" suppresses all logs except
-#     errors; "Changes" suppresses all logs except notifying which files have been changed; "Skips" suppresses all
-#     logs except files which have *not* been changed; "All" logs what the script does to each file it inspects.
+#  -Log (string; default "Errors"): sets which files you want to be informed about. "Errors" suppresses all logs;
+#     "Default" only logs errors; "Changes" logs errors and files that have been changed; "Skips" logs errors and
+#     files which have *not* been changed; "All" displays all logs.
 #
 # Examples:
 #   & '.\creature fluff tagger.ps1' -Path '.\homebrew'
@@ -42,10 +42,10 @@ PARAM (
 
 	[Parameter()]
 	[ValidateScript(
-		{ @("None", "Changes", "Skips", "All") -match $_ },
-		ErrorMessage = "Cannot bind parameter 'Log' due to enumeration values that are not valid. Select one of the following enumeration values and try again. The possible enumeration values are ""None"", ""Changes"", ""Skips"", ""All""."
+		{ @("None", "Errors", "Changes", "Skips", "All") -match $_ },
+		ErrorMessage = "Cannot bind parameter 'Log' due to enumeration values that are not valid. Select one of the following enumeration values and try again. The possible enumeration values are ""None"", ""Errors"", ""Changes"", ""Skips"", ""All""."
 	)]
-	[String]$Log = "None"
+	[String]$Log = $null
 )
 
 $Log = $Log.toLower()
@@ -79,9 +79,9 @@ if ((Test-Path $Path)) {
 		try {
 			$brew = Get-Content $target -Encoding Utf8 | ConvertFrom-Json
 		} catch {
-			if ($Log -eq "all") {
+			if ($Log -ne "none") {
 				Write-Host "  " -NoNewLine
-				Write-Warning ("Invalid JSON in " + $target)
+				Write-Error ("Invalid JSON in " + $target)
 			}
 		}
 		if ($brew.monsterFluff) {
@@ -132,9 +132,9 @@ if ((Test-Path $Path)) {
 		Get-ChildItem $target -Recurse -File |
 			Where-Object { $_.Extension -eq '.json' } |
 			ForEach-Object { . $PSCommandPath -Path $_ -Log $Log }
-	} else {
+	} elseif ($Log -ne "none") {
 		Write-Error "$target is not a ``.json``"
 	}
-} else {
+} elseif ($Log -ne "none") {
 	Write-Error "File/directory not found"
 }
