@@ -63,7 +63,10 @@ function Test-Fluff {
 		Write-Output $true
 	} elseif (
 		$InputObject._copy -and
-		-not $InputObject.$For -and
+		-not (
+			$InputObject.PSObject.Properties.Name -contains $For -and
+			-not $InputObject.$For
+		) -and
 		$InputObject._copy.source -in $brew._meta.sources.json -and
 		$InputObject._copy._mod.$For -ne "remove"
 	) {
