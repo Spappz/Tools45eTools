@@ -63,7 +63,7 @@ function Test-Fluff {
 		Write-Output $true
 	} elseif (
 		$InputObject._copy -and
-		$InputObject.$For -ne $null -and
+		-not $InputObject.$For -and
 		$InputObject._copy.source -in $brew._meta.sources.json -and
 		$InputObject._copy._mod.$For -ne "remove"
 	) {
