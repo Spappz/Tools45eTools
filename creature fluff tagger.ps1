@@ -84,7 +84,7 @@ if ((Test-Path $Path)) {
 		} catch {
 			if ($Log -ne "none") {
 				Write-Host "  " -NoNewLine
-				Write-Error ("Invalid JSON in " + $target)
+				Write-Warning ("Invalid JSON in " + $target)
 			}
 		}
 		if ($brew.monsterFluff) {
