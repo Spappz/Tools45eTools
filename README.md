@@ -29,4 +29,4 @@ This script resizes all the masks outputted by the PDF Image Extractor to match 
 
 ---
 
-Raise an issue if something's broken. Development ongoing. Contributions welcome.
+Raise an issue if something's broken. ~~Development ongoing.~~ Contributions welcome.
