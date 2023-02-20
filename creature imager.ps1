@@ -46,8 +46,8 @@
 # can be entirely empty and the file will just be skipped over—but where they contain a creature name that
 # name must be exact. There's no fuzzy matching here.
 #
-# You can find an example CSV here: https://9m.no/𐀋玛 (yes, that's a URL). Feel free to duplicate and edit it
-# to your heart's content. You can export a `.csv`of the currently viewed sheet from the File > Download menu.
+# You can find an example here: https://9m.no/𐀋玛 (yes, that's a URL). Feel free to duplicate and edit it to
+# your heart's content. You can export a `.csv`of the currently viewed sheet from the File > Download menu.
 #
 #
 # Spappz 2022
