@@ -128,6 +128,9 @@ $brew = Traverse-Tree $brew $false
 # Output the rubbish
 
 $outPath = $Path -replace '\.json$', '_TAGGED.json'
+# If you get bugs on the below for some reason, delete it and replace it with:
+#    $brew | ConvertTo-Json -Depth 99 | Out-File $outPath -Encoding utf8
+# All you'll be missing is unicode escaping for the en and em dash, and for the minus sign.
 (
 	[Regex]::Replace(
 		(ConvertTo-Json $brew -Depth 99),
