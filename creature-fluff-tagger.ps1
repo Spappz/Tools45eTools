@@ -27,9 +27,9 @@
 #     files which have *not* been changed; "All" displays all logs.
 #
 # Examples:
-#   & '.\creature fluff tagger.ps1' -Path '.\homebrew'
-#   & '.\creature fluff tagger.ps1' -Path '.\homebrew\creature\badooga; Better Greatwyrms.json' -Log Changes
-#   & '.\creature fluff tagger.ps1' -Path '.\homebrew' -Log All
+#   & .\creature-fluff-tagger.ps1 -Path '.\homebrew'
+#   & .\creature-fluff-tagger.ps1 -Path '.\homebrew\creature\badooga; Better Greatwyrms.json' -Log Changes
+#   & .\creature-fluff-tagger.ps1 -Path '.\homebrew' -Log All
 #
 #
 # Spappz 2023
