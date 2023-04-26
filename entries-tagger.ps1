@@ -12,7 +12,7 @@
 # have false negatives (i.e. things that should be tagged but aren't). It also obviously can't tag formatting
 # choices (e.g. `{@b bold text}`) or 'innumerable' lists (e.g. creatures, items, spells). It should ignore text
 # that is already tagged, but I wouldn't trust that necessarily and instead recommend you just don't tag text
-# before running this. In summary, don't expect it to do all the work for you, but # it'll get you 60% of the way
+# before running this. In summary, don't expect it to do all the work for you, but it'll get you 60% of the way
 # there!
 #
 # Note: this script requires PowerShell 6 or higher. Windows 10 only has PowerShell 5 installed by default.
