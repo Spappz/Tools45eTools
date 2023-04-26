@@ -17,6 +17,12 @@ This script applies images and tokens to a brew file in bulk by reading from a `
 
 ---
 
+### Entries Tagger
+
+This script looks throughout a brew file for `entries`-like properties, and then proceeds to (try to) automatically tag things.
+
+---
+
 ### Homebrew Merger
 
 This script stitches 5eTools-style homebrew JSONs together to output a single JSON with all the content included, saving you having to lug around many files at once.
