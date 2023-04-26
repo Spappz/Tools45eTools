@@ -45,18 +45,18 @@ function Tag-Entry {
 			$text -replace '^\s+' -replace '\s+$' -replace ' {2,}', ' ' `
 				-replace '(?<=\()([\dd \+\-×x\*÷\/\*]+\d)(?=\))', '{@damage $1}' `
 				-replace '\b(\d+d[\dd \+\-×x\*÷/]*\d)(?=( (\w){4,11})? damage\b)', '{@damage $1}' `
-				-replace '(?<=\brolls? (a )?)(d\d+)\b(?![{|])', '{@dice $2}' `
-				-replace '(?<!@d(amage|ice)) (\d+d[\dd \+\-×x\*÷/]*\d)\b(?![{|])', ' {@dice $2}' `
+				-replace '(?<=\brolls? (a )?)(d\d+)\b(?![}|])', '{@dice $2}' `
+				-replace '(?<!@d(amage|ice)) (\d+d[\dd \+\-×x\*÷/]*\d)\b(?![}|])', ' {@dice $2}' `
 				-creplace '(?<!\w)\+?(\-?\d)(?= (to hit|modifier))', '{@hit $1}' `
-				-creplace '\bDC ?(\d+)\b(?![{|])', '{@dc $1}' `
+				-creplace '\bDC ?(\d+)\b(?![}|])', '{@dc $1}' `
 				-replace "(?<=\b(be(comes?)?|is( ?n[o']t)?|while|a(nd?|lso)?|or|th(e|at)) )(blinded|charmed|deafened|frightened|grappled|in(capacitated|nvisible)|p(aralyz|etrifi|oison)ed|restrained|stunned|unconscious)\b", '{@condition $6}' `
 				-replace "(?<=\b(knocked|pushed|shoved|becomes?|falls?|while|lands?) )(prone|unconscious)\b", '{@condition $2}' `
 				-replace "(?<=levels? of )exhaustion\b", "{@condition exhaustion}" `
 				-creplace '(?<=\()(A(thletics|crobatics|rcana|nimal Handling)|Per(ception|formance|suasion)|S(leight of Hand|tealth|urvival)|In(sight|vestigation|timidation)|Nature|Religion|Medicine|History|Deception)(?=\))', '{@skill $1}' `
 				-creplace '\b(A(thletics|crobatics|rcana|nimal Handling)|Per(ception|formance|suasion)|S(leight of Hand|tealth|urvival)|In(sight|vestigation|timidation)|Nature|Religion|Medicine|History|Deception)(?= (check|modifier|bonus|roll|score))', '{@skill $1}' `
-				-replace '(?<!cast (the )?)\b(darkvision|blindsight|tr(emorsense|uesight))\b(?!( spell|[{|]))', '{@sense $2}' `
-				-creplace "\b(Attack(?! roll)|Cast a Spell|D(ash|isengage|odge)|H(elp|ide)|Ready|Search|Use an Object)\b(?![{|])", '{@action $1}' `
-				-replace '\bopportunity attack\b(?![{|])', '{@action opportunity attack}' `
+				-replace '(?<!cast (the )?)\b(darkvision|blindsight|tr(emorsense|uesight))\b(?!( spell|[}|]))', '{@sense $2}' `
+				-creplace "\b(Attack(?! roll)|Cast a Spell|D(ash|isengage|odge)|H(elp|ide)|Ready|Search|Use an Object)\b(?![}|])", '{@action $1}' `
+				-replace '\bopportunity attack\b(?![}|])', '{@action opportunity attack}' `
 				-replace '\b(opportunity attacks|attacks? of opportunity)\b', '{@action opportunity attack||$1}' `
 				-replace '\b(\d\d?) percent chance\b', '{@chance $1} chance'
 			)
