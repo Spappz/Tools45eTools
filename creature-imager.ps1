@@ -354,7 +354,7 @@ if ($processImages) {
 
 # Tidying up
 Write-Host "`n`nComplete.`n`nFinishing up...`n"
-$brew | ConvertTo-Json -Depth 99 -Compress | Out-File -Path ($outputPath + $brew._meta.sources[0].authors[0] + '; ' + $brew._meta.sources[0].full + '.json') -Encoding utf8
+$brew | ConvertTo-Json -Depth 99 | Out-File -Path ($outputPath + $brew._meta.sources[0].authors[0] + '; ' + $brew._meta.sources[0].full + '.json') -Encoding utf8
 if ($needsHuman.tokens.Count -or $needsHuman.images.Count) {
 	Write-Warning ("Process completed with " + ($needsHuman.tokens.Count + $needsHuman.images.Count) + " warnings.")
 	$logName = $outputPath + 'imager log ' + (Get-Date -UFormat %s) + '.json'
