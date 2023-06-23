@@ -67,10 +67,24 @@ function Test-Fluff {
 			$InputObject.PSObject.Properties.Name -contains $For -and
 			-not $InputObject.$For
 		) -and
-		$InputObject._copy.source -in $brew._meta.sources.json -and
 		$InputObject._copy._mod.$For -ne "remove"
 	) {
-		Write-Output (Test-Fluff $brew.monsterFluff[$brew.monsterFluff.name.indexOf($InputObject._copy.name)] -For $For)
+		if (
+			$InputObject._copy._mod.$For.mode -in @(
+				"appendArr"
+				"prependArr"
+				"replaceArr"
+				"insertArr"
+				"replaceOrAppendArr"
+				"appendIfNotExistsArr"
+			)
+		) {
+			Write-Output $true
+		} elseif ($InputObject._copy.source -in $brew._meta.sources.json) {
+			Write-Output (Test-Fluff $brew.monsterFluff[$brew.monsterFluff.name.indexOf($InputObject._copy.name)] -For $For)
+		} else {
+			Write-Output $false
+		}
 	} else {
 		Write-Output $false
 	}
@@ -110,21 +124,7 @@ if ((Test-Path $Path)) {
 				if ($Log -in @("changes", "all")) {
 					Write-Host ("  Tagged " + ($target -replace '^.*[\\/]([^\\/]+[\\/][^\\/]+)$', '$1'))
 				}
-				(
-					[Regex]::Replace(
-						(ConvertTo-Json $brew -Depth 99 -Compress),
-						"\\u(?<Value>\w{4})",
-						{
-							PARAM ($Matches)
-							(
-								[char](
-									[int]::Parse($Matches.Groups['Value'].Value,
-									[System.Globalization.NumberStyles]::HexNumber)
-								)
-							).ToString()
-						}
-					) -replace '—', '\u2014' -replace '–', '\u2013' -replace '−', '\u2212'
-				) | Out-File -FilePath $target -Encoding Utf8
+				ConvertTo-Json $brew -Depth 99 | Out-File -FilePath $target -Encoding Utf8
 			} elseif ($Log -in @("skips", "all")) {
 				Write-Host ("  Left unchanged " + ($target -replace '^.*[\\/]([^\\/]+[\\/][^\\/]+)$', '$1'))
 			}
