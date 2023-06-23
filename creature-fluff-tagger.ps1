@@ -103,22 +103,24 @@ if ((Test-Path $Path)) {
 		}
 		if ($brew.monsterFluff) {
 			$tagsApplied = $false
-			$brew.monster = $brew.monster | ForEach-Object {
-				if ($_.fluff._monsterFluff -and $_.fluff._monsterFluff.source -in $brew._meta.sources.json) {
-					$fluff = $brew.monsterFluff[$brew.monsterFluff.name.indexOf($_.fluff._monsterFluff.name)]
+			$brew.monster = @(
+				$brew.monster | ForEach-Object {
+					if ($_.fluff._monsterFluff -and $_.fluff._monsterFluff.source -in $brew._meta.sources.json) {
+						$fluff = $brew.monsterFluff[$brew.monsterFluff.name.indexOf($_.fluff._monsterFluff.name)]
 
-					if (-not $_.hasFluff -and (Test-Fluff $fluff -For entries)) {
-						$_ | Add-Member -MemberType NoteProperty -Name hasFluff -Value $true
-						$tagsApplied = $true
-					}
+						if (-not $_.hasFluff -and (Test-Fluff $fluff -For entries)) {
+							$_ | Add-Member -MemberType NoteProperty -Name hasFluff -Value $true
+							$tagsApplied = $true
+						}
 
-					if (-not $_.hasFluffImages -and (Test-Fluff $fluff -For images)) {
-						$_ | Add-Member -MemberType NoteProperty -Name hasFluffImages -Value $true
-						$tagsApplied = $true
+						if (-not $_.hasFluffImages -and (Test-Fluff $fluff -For images)) {
+							$_ | Add-Member -MemberType NoteProperty -Name hasFluffImages -Value $true
+							$tagsApplied = $true
+						}
 					}
+					Write-Output $_
 				}
-				Write-Output $_
-			}
+			)
 
 			if ($tagsApplied) {
 				if ($Log -in @("changes", "all")) {
