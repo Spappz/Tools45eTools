@@ -22,8 +22,8 @@
 #
 # Parameters:
 #  -Path (string; required): absolute or relative path to a file or directory
-#  -Log (string; default "Errors"): determines the logging level of the script.. "Errors" suppresses all logs;
-#     "Default" only logs errors; "Changes" logs errors and files that have been changed; "Skips" logs errors and
+#  -Log (string; default "Changes"): determines the logging level of the script.. "None" suppresses all logs;
+#     "Errors" only logs errors; "Changes" logs errors and files that have been changed; "Skips" logs errors and
 #     files which have *not* been changed; "All" displays all logs.
 #
 # Examples:
@@ -45,7 +45,7 @@ PARAM (
 		{ @("None", "Errors", "Changes", "Skips", "All") -match $_ },
 		ErrorMessage = "Cannot bind parameter 'Log' due to enumeration values that are not valid. Select one of the following enumeration values and try again. The possible enumeration values are ""None"", ""Errors"", ""Changes"", ""Skips"", ""All""."
 	)]
-	[String]$Log = $null
+	[String]$Log = "Changes"
 )
 
 $Log = $Log.toLower()
