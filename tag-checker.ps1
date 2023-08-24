@@ -8,8 +8,6 @@
 #
 # To write the errors to a file, you should first convert the output to JSON (see examples below).
 #
-# Note: this script requires PowerShell 7 or higher. Windows 10 only has PowerShell 5 installed by default.
-#
 #
 # Usage:
 #   & <path to script> [-Path] <path to file/directory> [-LogErrors]
