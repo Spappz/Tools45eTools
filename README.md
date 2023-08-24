@@ -1,5 +1,6 @@
 ## How2PowerShell
-On Windows, right-click this script and select 'Run with PowerShell'. If a script specifies that it requires a version of PowerShell greater than 5, you'll need to [install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows) it. On Mac OS and Linux, you will probably have to install [PowerShell](https://github.com/powershell/powershell) and run it via command line. 
+
+On Windows, right-click this script and select 'Run with PowerShell'. If a script specifies that it requires a version of PowerShell greater than 5, you'll need to [install](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows) it. On Mac OS and Linux, you will probably have to install [PowerShell](https://github.com/powershell/powershell) and run it via command line.
 
 Each script has some comments at the top. Read them before use.
 
@@ -32,6 +33,12 @@ This script stitches 5eTools-style homebrew JSONs together to output a single JS
 ### Mask Rescaler
 
 This script resizes all the masks outputted by the PDF Image Extractor to match the preceding image's size.
+
+---
+
+### Tag Checker
+
+This script tests a file or directory of files for any bad `@tag`s.
 
 ---
 
