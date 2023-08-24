@@ -12,7 +12,7 @@
 #
 #
 # Usage:
-#   & <path to script> [-Path] <path to homebrew file/directory> [-LogErrors]
+#   & <path to script> [-Path] <path to file/directory> [-LogErrors]
 #
 # Parameters:
 #  -Path (string; required): absolute or relative path to a file or directory
@@ -34,7 +34,7 @@ PARAM (
 	[Parameter(Mandatory, Position = 0)]
 	[String]$Path,
 
-	# Log files and bad tags found to the console
+	# Log erroneous files to the console early (useful if testing a large directory)
 	[switch]$LogErrors
 )
 
