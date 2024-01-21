@@ -127,6 +127,7 @@ $keywords = @(
 	'subclassFeature'
 	'homebrew'
 	'itemEntry'
+	'cite'
 )
 
 $target = Get-Item (Resolve-Path $Path -ErrorAction Stop)
