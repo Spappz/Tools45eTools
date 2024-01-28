@@ -1,8 +1,6 @@
 # Tools45eTools
 
-A collection of PowerShell scripts to make a few niche things in the 5etools project easier.
-
-Raise an issue if something's broken. ~~Development ongoing.~~ Contributions welcome.
+A collection of PowerShell scripts to make a few niche things in the 5eTools project easier.
 
 - [How2PowerShell](#how2powershell)
 - [The scripts](#the-scripts)
@@ -13,6 +11,7 @@ Raise an issue if something's broken. ~~Development ongoing.~~ Contributions wel
   - [Mask Rescaler](#mask-rescaler)
   - [Tag Checker](#tag-checker)
   - [URL Tester](#url-tester)
+- [Contributing](#contributing)
 
 ## How2PowerShell
 
@@ -51,3 +50,7 @@ This script tests a file or directory of files for any bad `@tag`s.
 ### URL Tester
 
 This script verifies that media URLs aren't dead.
+
+## Contributing
+
+Raise an issue if something's broken. ~~Development ongoing.~~ Additions welcome (in any language; I just use PowerShell because I'm lazy).
