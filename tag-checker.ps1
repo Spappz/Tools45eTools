@@ -133,11 +133,15 @@ $keywords = @(
 $target = Get-Item (Resolve-Path $Path -ErrorAction Stop)
 switch ($target.Attributes) {
 	Archive {
-		$files = @($target)
+		if ($target.Extension -eq '.json') {
+			$files = @($target)
+		} else {
+			throw "Not a JSON file: $($target.FullName)"
+		}
 		break
 	}
 	Directory {
-		$files = @(Get-ChildItem $target -File -Recurse | Where-Object { $_.Extension -eq '.json' })
+		$files = @(Get-ChildItem $target -File -Recurse -Exclude 'node_modules' | Where-Object { $_.Extension -eq '.json' })
 		if (-not $files.Count) {
 			throw "No JSON files found in $($target.FullName)"
 			exit 1
