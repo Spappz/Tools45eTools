@@ -39,6 +39,7 @@ This script resizes all the masks outputted by the PDF Image Extractor to match 
 ### Tag Checker
 
 This script tests a file or directory of files for any bad `@tag`s.
+
 ---
 
 ### Tag Checker
