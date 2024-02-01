@@ -117,19 +117,21 @@ $imageList = Get-ChildItem |
 # Assume the order is image, mask, image, mask
 $resizedMasks = [System.Collections.Generic.List[string]]::new()
 for ($i = 0; $i -lt $imageList.Count; $i = $i + 2) {
-	# Read image for reference
+	# Read files
 	$image = New-Object -TypeName System.Drawing.Bitmap -ArgumentList $imageList[$i]
 	$mask = New-Object -TypeName System.Drawing.Bitmap -ArgumentList $imageList[$i + 1]
 	# Rescale and save mask based on the image's dimensions
 	if ($image.Width -ne $mask.Width -or $image.Height -ne $mask.Height) {
-		$resizedMasks.Add($imageList[$i + 1].Name)
+		$resizedMasks.Add($imageList[$i + 1])
 		Resize-Image -Width $image.Width -Height $image.Height -ImagePath $imageList[$i + 1]
 	}
+	# Release resources
+	$image.Dispose()
+	$NewImage.Dispose()
 }
 
-# Move old masks into an `old_masks` directory as clean-up 
-$null = New-Item -ItemType Directory -Name ../old_masks
-$resizedMasks |
-	ForEach-Object { $_ -replace '_resized(?=\.png$)' } |
-	Move-Item -Destination ../old_masks
-
+# Move old masks into an `old_masks` directory as clean-up
+if (-not (Test-Path ../old-masks)) {
+	$null = New-Item -ItemType Directory -Name ../old_masks
+}
+$resizedMasks | ForEach-Object { Move-Item -Path $_ -Destination ../old_masks }
