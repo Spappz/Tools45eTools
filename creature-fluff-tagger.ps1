@@ -42,10 +42,10 @@ PARAM (
 
 	[Parameter()]
 	[ValidateScript(
-		{ @("None", "Errors", "Changes", "Skips", "All") -match $_ },
+		{ @('None', 'Errors', 'Changes', 'Skips', 'All') -match $_ },
 		ErrorMessage = "Cannot bind parameter 'Log' due to enumeration values that are not valid. Select one of the following enumeration values and try again. The possible enumeration values are ""None"", ""Errors"", ""Changes"", ""Skips"", ""All""."
 	)]
-	[String]$Log = "Changes"
+	[String]$Log = 'Changes'
 )
 
 $Log = $Log.toLower()
@@ -67,16 +67,16 @@ function Test-Fluff {
 			$InputObject.PSObject.Properties.Name -contains $For -and
 			-not $InputObject.$For
 		) -and
-		$InputObject._copy._mod.$For -ne "remove"
+		$InputObject._copy._mod.$For -ne 'remove'
 	) {
 		if (
 			$InputObject._copy._mod.$For.mode -in @(
-				"appendArr"
-				"prependArr"
-				"replaceArr"
-				"insertArr"
-				"replaceOrAppendArr"
-				"appendIfNotExistsArr"
+				'appendArr'
+				'prependArr'
+				'replaceArr'
+				'insertArr'
+				'replaceOrAppendArr'
+				'appendIfNotExistsArr'
 			)
 		) {
 			Write-Output $true
@@ -92,13 +92,13 @@ function Test-Fluff {
 
 if ((Test-Path $Path)) {
 	$target = Get-Item $Path
-	if ($target.Extension -eq ".json") {
+	if ($target.Extension -eq '.json') {
 		try {
 			$brew = Get-Content $target -Encoding Utf8 | ConvertFrom-Json
 		} catch {
-			if ($Log -ne "none") {
-				Write-Host "  " -NoNewLine
-				Write-Warning ("Invalid JSON in " + $target)
+			if ($Log -ne 'none') {
+				Write-Host '  ' -NoNewline
+				Write-Warning ('Invalid JSON in ' + $target)
 			}
 		}
 		if ($brew.monsterFluff) {
@@ -123,23 +123,51 @@ if ((Test-Path $Path)) {
 			)
 
 			if ($tagsApplied) {
-				if ($Log -in @("changes", "all")) {
-					Write-Host ("  Tagged " + ($target -replace '^.*[\\/]([^\\/]+[\\/][^\\/]+)$', '$1'))
+				if ($Log -in @('changes', 'all')) {
+					Write-Host ('  Tagged ' + ($target -replace '^.*[\\/]([^\\/]+[\\/][^\\/]+)$', '$1'))
 				}
 				ConvertTo-Json $brew -Depth 99 | Out-File -FilePath $target -Encoding Utf8
-			} elseif ($Log -in @("skips", "all")) {
-				Write-Host ("  Left unchanged " + ($target -replace '^.*[\\/]([^\\/]+[\\/][^\\/]+)$', '$1'))
+			} elseif ($Log -in @('skips', 'all')) {
+				Write-Host ('  Left unchanged ' + ($target -replace '^.*[\\/]([^\\/]+[\\/][^\\/]+)$', '$1'))
 			}
-		} elseif ($Log -in @("skips", "all")) {
-			Write-Host ("  Left unchanged " + ($target -replace '^.*[\\/]([^\\/]+[\\/][^\\/]+)$', '$1'))
+		} elseif ($Log -in @('skips', 'all')) {
+			Write-Host ('  Left unchanged ' + ($target -replace '^.*[\\/]([^\\/]+[\\/][^\\/]+)$', '$1'))
 		}
 	} elseif ($target.Attributes.HasFlag([System.IO.FileAttributes]::Directory)) {
-		Get-ChildItem $target -Recurse -File |
-			Where-Object { $_.Extension -eq '.json' } |
-			ForEach-Object { . $PSCommandPath -Path $_ -Log $Log }
-	} elseif ($Log -ne "none") {
+		$baseFiles = Get-ChildItem $target -File
+		$i = $baseFiles.Name.IndexOf('.gitignore')
+		if ($i -ne -1) {
+			$gitignore = Get-Content $baseFiles[$i] -Encoding utf8 |
+				Where-Object { $_ -and $_ -notmatch '^#' } |
+				ForEach-Object {
+					# Escape .
+					# Convert * to any character
+					# Convert ? to any single character
+					# dir/ matches sub-paths
+					# /xyz matches only within root
+					# [!...] becomes [^...]
+					# Make path-separators neutral
+					$_ -replace '\.', '\.' `
+						-replace '\*', '.*' `
+						-replace '\?', '.' `
+						-replace '/$', '/.+' `
+						-replace '^/', [Regex]::Escape($target) `
+						-replace '\[!([^]]+)\]', '[^$1]' `
+						-replace '/', '[/|\\]'
+				}
+			$gitignore += 'package\.json$'
+			$gitignore += 'package-lock\.json$'
+			Get-ChildItem $target -Recurse -File |
+				Where-Object { $_.Extension -eq '.json' -and -not (Select-String -Quiet -Pattern $gitignore -InputObject $_.FullName) } |
+				ForEach-Object { . $PSCommandPath -Path $_ -Log $Log }
+		} else {
+			Get-ChildItem $target -Recurse -File |
+				Where-Object { $_.Extension -eq '.json' } |
+				ForEach-Object { . $PSCommandPath -Path $_ -Log $Log }
+		}
+	} elseif ($Log -ne 'none') {
 		Write-Error "$target is not a ``.json``"
 	}
-} elseif ($Log -ne "none") {
-	Write-Error "File/directory not found"
+} elseif ($Log -ne 'none') {
+	Write-Error 'File/directory not found'
 }
