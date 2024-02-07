@@ -141,7 +141,37 @@ switch ($target.Attributes) {
 		break
 	}
 	Directory {
-		$files = @(Get-ChildItem $target -File -Recurse -Exclude 'node_modules' | Where-Object { $_.Extension -eq '.json' })
+		$baseFiles = Get-ChildItem $target -File
+		$i = $baseFiles.Name.IndexOf('.gitignore')
+		if ($i -ne -1) {
+			$gitignore = Get-Content $baseFiles[$i] -Encoding utf8 |
+				Where-Object { $_ -and $_ -notmatch '^#' } |
+				ForEach-Object {
+					# Escape .
+					# Convert * to any character
+					# Convert ? to any single character
+					# dir/ matches sub-paths
+					# /xyz matches only within root
+					# [!...] becomes [^...]
+					# Make path-separators neutral
+					$_ -replace '\.', '\.' `
+						-replace '\*', '.*' `
+						-replace '\?', '.' `
+						-replace '/$', '/.+' `
+						-replace '^/', [Regex]::Escape($target) `
+						-replace '\[!([^]]+)\]', '[^$1]' `
+						-replace '/', '[/|\\]'
+				}
+			$gitignore += 'package\.json$'
+			$gitignore += 'package-lock\.json$'
+			$files = @(
+				Get-ChildItem $target -File -Recurse | Where-Object {
+					$_.Extension -eq '.json' -and -not (Select-String -Quiet -Pattern $gitignore -InputObject $_.FullName)
+				}
+			)
+		} else {
+			$files = @(Get-ChildItem $target -File -Recurse | Where-Object { $_.Extension -eq '.json' })
+		}
 		if (-not $files.Count) {
 			throw "No JSON files found in $($target.FullName)"
 			exit 1
