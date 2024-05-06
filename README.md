@@ -4,9 +4,9 @@ A collection of PowerShell scripts to make a few niche things in the 5eTools pro
 
 - [How2PowerShell](#how2powershell)
 - [The scripts](#the-scripts)
-  - [Creature Fluff Tagger](#creature-fluff-tagger)
   - [Creature Imager](#creature-imager)
   - [Entries Tagger](#entries-tagger)
+  - [Fluff Tagger](#fluff-tagger)
   - [Homebrew Merger](#homebrew-merger)
   - [Mask Rescaler](#mask-rescaler)
   - [Tag Checker](#tag-checker)
@@ -23,10 +23,6 @@ Otherwise, you'll need to [install](https://learn.microsoft.com/en-us/powershell
 
 ## The scripts
 
-### Creature Fluff Tagger
-
-This script adds the `hasFluff` and `hasFluffImages` properties, as appropriate, to creatures with a referenced `_monsterFluff` object.
-
 ### Creature Imager
 
 This script applies images and tokens to a brew file in bulk by reading from a `.csv` file. Useful for creature-heavy conversions and art updates.
@@ -34,6 +30,10 @@ This script applies images and tokens to a brew file in bulk by reading from a `
 ### Entries Tagger
 
 This script looks throughout a brew file for `entries`-like properties, and then proceeds to (try to) automatically tag things.
+
+### Fluff Tagger
+
+This script adds the `hasFluff` and `hasFluffImages` properties, as appropriate, to (most) datatypes with a referenced `_<datatype>Fluff` object.
 
 ### Homebrew Merger
 
