@@ -1,5 +1,5 @@
 # 5eTools Homebrew Splitter
-# =======================
+# =========================
 #
 # This script splits out each and every content-entity in a combined 5eTools homebrew file into a unique file. A
 # subdirectory for each data-type is created, and the single-entity files are sorted into those subdirectories.
@@ -54,14 +54,17 @@ if (-not (Test-Path $Path)) {
 	throw 'Path does not exist.'
 }
 
-$output = $Destination ? $Destination : ((Split-Path $Path -Leaf) -replace '\.json$')
-if ((Test-Path $output)) {
+if (-not $Destination) {
+	$Destination = (Split-Path $Path -Leaf) -replace '\.json$'
+}
+
+if ((Test-Path $Destination)) {
 	throw 'Destination already exists.'
 }
-if ($output -notmatch '\w') {
+if ($Destination -notmatch '\w') {
 	throw 'Destination is invalid.'
 }
-if (($output | Split-Path | Test-Path)) {
+if (($Destination | Split-Path | Test-Path)) {
 	throw "Destination's parent cannot be found."
 }
 
@@ -70,12 +73,12 @@ if ($brew -isnot [PSCustomObject] -or -not $brew._meta) {
 	throw 'Invalid 5eTools JSON.'
 }
 
-$null = New-Item $output -ItemType Directory
+$null = New-Item $Destination -ItemType Directory
 
 $brew.PSObject.Properties
 | Where-Object { $_.Name -ne '_meta' -and $_.Name -notmatch 'schema$' }
 | ForEach-Object {
-	$subdir = "$output/$($_.Name)"
+	$subdir = "$Destination/$($_.Name)"
 	$null = New-Item $subdir -ItemType Directory
 	foreach ($entity in $_.Value) {
 		$obj = [PSCustomObject]@{
