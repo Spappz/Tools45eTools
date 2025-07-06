@@ -24,35 +24,35 @@ Otherwise, you'll need to [install](https://learn.microsoft.com/en-us/powershell
 
 ## The scripts
 
-### Creature Imager
+### [Creature Imager](./creature-imager.ps1)
 
 This script applies images and tokens to a brew file in bulk by reading from a `.csv` file. Useful for creature-heavy conversions and art updates.
 
-### Entries Tagger
+### [Entries Tagger](./entries-tagger.ps1)
 
 This script looks throughout a brew file for `entries`-like properties, and then proceeds to (try to) automatically tag things.
 
-### Fluff Tagger
+### [Fluff Tagger](./fluff-tagger.ps1)
 
 This script adds the `hasFluff` and `hasFluffImages` properties, as appropriate, to (most) datatypes with a referenced `_<datatype>Fluff` object.
 
-### Homebrew Merger
+### [Homebrew Merger](./homebrew-merger.ps1)
 
 This script stitches 5eTools-style homebrew JSONs together to output a single JSON with all the content included, saving you having to lug around many files at once.
 
-### Homebrew Splitter
+### [Homebrew Splitter](./homebrew-splitter.ps1)
 
-This script separates a 5eTools-style homebrew JSON into many files, one for each content-entity. This is useful when needing to do multiple precise edits to different parts of content if the complete file is [too large to validate quickly](https://github.com/microsoft/vscode/issues/42679). You can use the [Homebrew Merger](#homebrew-merger) to reconstitute the file afterwards.
+This script separates a 5eTools-style homebrew JSON into many files, one for each content-entity. This is useful when editing a file that is [too large to validate](https://github.com/microsoft/vscode/issues/42679); you can use the [Homebrew Merger](#homebrew-merger) to reconstitute the single file afterwards.
 
-### Mask Rescaler
+### [Mask Rescaler](./mask-rescaler.ps1)
 
 This script resizes all the masks outputted by the PDF Image Extractor to match the preceding image's size.
 
-### Tag Checker
+### [Tag Checker](./tag-checker.ps1)
 
 This script tests a file or directory of files for any bad `@tag`s.
 
-### URL Tester
+### [URL Tester](./URL-tester.ps1)
 
 This script verifies that media URLs aren't dead.
 
