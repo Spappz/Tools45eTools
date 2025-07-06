@@ -27,7 +27,7 @@ $brew = [PSCustomObject]@{
 
 # Get files
 $fileCounter = 0
-Get-ChildItem | Where-Object { $_.name -match '\.json$' -and $_.name -notmatch '^merged-homebrew-\w{8}\.json' } | ForEach-Object {
+Get-ChildItem -Recurse | Where-Object { $_.name -match '\.json$' -and $_.name -notmatch '^merged-homebrew-\w{8}\.json' } | ForEach-Object {
     # Load file
     $file = $_ | Get-Content -Encoding utf8 | ConvertFrom-Json
     $fileCounter++

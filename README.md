@@ -8,6 +8,7 @@ A collection of PowerShell scripts to make a few niche things in the 5eTools pro
   - [Entries Tagger](#entries-tagger)
   - [Fluff Tagger](#fluff-tagger)
   - [Homebrew Merger](#homebrew-merger)
+  - [Homebrew Splitter](#homebrew-splitter)
   - [Mask Rescaler](#mask-rescaler)
   - [Tag Checker](#tag-checker)
   - [URL Tester](#url-tester)
@@ -38,6 +39,10 @@ This script adds the `hasFluff` and `hasFluffImages` properties, as appropriate,
 ### Homebrew Merger
 
 This script stitches 5eTools-style homebrew JSONs together to output a single JSON with all the content included, saving you having to lug around many files at once.
+
+### Homebrew Splitter
+
+This script separates a 5eTools-style homebrew JSON into many files, one for each content-entity. This is useful when needing to do multiple precise edits to different parts of content if the complete file is [too large to validate quickly](https://github.com/microsoft/vscode/issues/42679). You can use the [Homebrew Merger](#homebrew-merger) to reconstitute the file afterwards.
 
 ### Mask Rescaler
 
